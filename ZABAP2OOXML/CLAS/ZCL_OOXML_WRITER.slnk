@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_OOXML_WRITER" VERSION="1" LANGU="E" DESCRIPT="Office Open XML Document Writer" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSABSTRCT="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <localImplementation>*&quot;* use this source file for the definition and implementation of
+*&quot;* local helper classes, interface definitions and type
+*&quot;* declarations</localImplementation>
+ <localTypes>*&quot;* use this source file for any type of declarations (class
+*&quot;* definitions, interfaces or type declarations) you need for
+*&quot;* components in the private section</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Content Type XML File Name" EXPOSURE="1" STATE="1" EDITORDER="1 " ATTDECLTYP="2" ATTVALUE="&apos;[Content_Types].xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="App XML File Name" EXPOSURE="1" STATE="1" EDITORDER="2 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/app.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Core XML File Name" EXPOSURE="1" STATE="1" EDITORDER="3 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/core.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Rels XML File Name" EXPOSURE="1" STATE="1" EDITORDER="4 " ATTDECLTYP="2" ATTVALUE="&apos;_rels/.rels&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="OFF" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="5 " ATTDECLTYP="2" ATTVALUE="&apos;0&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="ON" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="6 " ATTDECLTYP="2" ATTVALUE="&apos;1&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="OOXML_DOC" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" EXPOSURE="1" STATE="1" EDITORDER="0 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OOXML_DOCUMENT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE" VERSION="1" LANGU="E" DESCRIPT="Create OOXML document" EXPOSURE="1" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE" SCONAME="EP_OOXML_DOCUMENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD create.
+
+* Office 2007 file format is a cab of several xml files with extension .xlsx
+
+  DATA: lo_zip              TYPE REF TO cl_abap_zip.
+
+  DATA: lv_content         TYPE xstring.
+
+* STEP 1: Create archive object file (ZIP)
+  CREATE OBJECT lo_zip.
+
+**********************************************************************
+* STEP 2: Add [Content_Types].xml to zip
+  lv_content = me-&gt;create_content_types( ).
+  lo_zip-&gt;add( name    = me-&gt;c_content_types
+               content = lv_content ).
+
+**********************************************************************
+* STEP 3: Add _rels/.rels to zip
+  lv_content = me-&gt;create_relationships( ).
+  lo_zip-&gt;add( name    = me-&gt;c_relationships
+               content = lv_content ).
+
+**********************************************************************
+* STEP 4: Add docProps/app.xml to zip
+  lv_content = me-&gt;create_docprops_app( ).
+  lo_zip-&gt;add( name    = me-&gt;c_docprops_app
+               content = lv_content ).
+
+**********************************************************************
+* STEP 5: Add docProps/core.xml to zip
+  lv_content = me-&gt;create_docprops_core( ).
+  lo_zip-&gt;add( name    = me-&gt;c_docprops_core
+               content = lv_content ).
+
+**********************************************************************
+* STEP 12: Create the final zip
+  ep_ooxml_document = lo_zip-&gt;save( ).
+
+ENDMETHOD.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Create &apos;[Content_Types].xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>method CREATE_CONTENT_TYPES.
+
+*
+*** Constant node name
+*  DATA: lc_xml_node_types         TYPE string VALUE &apos;Types&apos;,
+*        lc_xml_node_override      TYPE string VALUE &apos;Override&apos;,
+*        lc_xml_node_default       TYPE string VALUE &apos;Default&apos;,
+*        &quot; Node attributes
+*        lc_xml_attr_partname      TYPE string VALUE &apos;PartName&apos;,
+*        lc_xml_attr_extension     TYPE string VALUE &apos;Extension&apos;,
+*        lc_xml_attr_contenttype   TYPE string VALUE &apos;ContentType&apos;,
+*        &quot; Node namespace
+*        lc_xml_node_types_ns      TYPE string VALUE &apos;http://schemas.openxmlformats.org/package/2006/content-types&apos;,
+*        &quot; Node extension
+*        lc_xml_node_rels_ext      TYPE string VALUE &apos;rels&apos;,
+*        lc_xml_node_xml_ext       TYPE string VALUE &apos;xml&apos;,
+*        &quot; Node partnumber
+*        lc_xml_node_theme_pn      TYPE string VALUE &apos;/xl/theme/theme1.xml&apos;,
+*        lc_xml_node_styles_pn     TYPE string VALUE &apos;/xl/styles.xml&apos;,
+*        lc_xml_node_workb_pn      TYPE string VALUE &apos;/xl/workbook.xml&apos;,
+*        lc_xml_node_props_pn      TYPE string VALUE &apos;/docProps/app.xml&apos;,
+*        lc_xml_node_worksheet_pn  TYPE string VALUE &apos;/xl/worksheets/sheet#.xml&apos;,
+*        lc_xml_node_strings_pn    TYPE string VALUE &apos;/xl/sharedStrings.xml&apos;,
+*        lc_xml_node_core_pn       TYPE string VALUE &apos;/docProps/core.xml&apos;,
+*        lc_xml_node_chart_pn      TYPE string VALUE &apos;/xl/charts/chart#.xml&apos;,
+*        &quot; Node contentType
+*        lc_xml_node_theme_ct      TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.theme+xml&apos;,
+*        lc_xml_node_styles_ct     TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml&apos;,
+*        lc_xml_node_workb_ct      TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml&apos;,
+*        lc_xml_node_rels_ct       TYPE string VALUE &apos;application/vnd.openxmlformats-package.relationships+xml&apos;,
+*        lc_xml_node_xml_ct        TYPE string VALUE &apos;application/xml&apos;,
+*        lc_xml_node_props_ct      TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.extended-properties+xml&apos;,
+*        lc_xml_node_worksheet_ct  TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml&apos;,
+*        lc_xml_node_strings_ct    TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml&apos;,
+*        lc_xml_node_core_ct       TYPE string VALUE &apos;application/vnd.openxmlformats-package.core-properties+xml&apos;,
+*        lc_xml_node_table_ct      TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml&apos;,
+*        lc_xml_node_drawings_ct   TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.drawing+xml&apos;,
+*        lc_xml_node_chart_ct      TYPE string VALUE &apos;application/vnd.openxmlformats-officedocument.drawingml.chart+xml&apos;.
+*
+*  DATA: lo_ixml           TYPE REF TO if_ixml,
+*        lo_document       TYPE REF TO if_ixml_document,
+*        lo_element_root   TYPE REF TO if_ixml_element,
+*        lo_element        TYPE REF TO if_ixml_element,
+*        lo_encoding       TYPE REF TO if_ixml_encoding,
+*        lo_streamfactory  TYPE REF TO if_ixml_stream_factory,
+*        lo_ostream        TYPE REF TO if_ixml_ostream,
+*        lo_renderer       TYPE REF TO if_ixml_renderer,
+*        lo_worksheet      TYPE REF TO zcl_excel_worksheet,
+*        lo_iterator       TYPE REF TO cl_object_collection_iterator,
+*        lo_nested_iterator TYPE REF TO cl_object_collection_iterator,
+*        lo_table          TYPE REF TO zcl_excel_table.
+*
+*  DATA: lv_worksheets_num         TYPE i,
+*        lv_worksheets_numc        TYPE numc3,
+*        lv_xml_node_worksheet_pn  TYPE string,
+*        lv_xml_size               TYPE i,
+*        lv_value                  TYPE string,
+*        lv_drawing_index          TYPE i VALUE 1,
+*        lv_index_str              TYPE string.
+*
+***********************************************************************
+** STEP 1: Create [Content_Types].xml into the root of the ZIP
+*  lo_ixml = cl_ixml=&gt;create( ).
+*
+***********************************************************************
+** STEP 2: Set document attributes
+*  lo_encoding = lo_ixml-&gt;create_encoding( byte_order = if_ixml_encoding=&gt;co_platform_endian
+*                                          character_set = &apos;UTF-8&apos; ).
+*  lo_document = lo_ixml-&gt;create_document( ).
+*  lo_document-&gt;set_encoding( lo_encoding ).
+*  lo_document-&gt;set_standalone( abap_true ).
+*
+***********************************************************************
+** STEP 3: Create main node types
+*  lo_element_root  = lo_document-&gt;create_simple_element( name   = lc_xml_node_types
+*                                                         parent = lo_document ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns&apos;
+*  value = lc_xml_node_types_ns ).
+*
+***********************************************************************
+** STEP 4: Create subnodes
+*
+*  &quot; rels node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_default
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_extension
+*                                value = lc_xml_node_rels_ext ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_rels_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; extension node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_default
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_extension
+*                                value = lc_xml_node_xml_ext ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_xml_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Theme node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_theme_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_theme_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Styles node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_styles_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_styles_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Workbook node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_workb_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_workb_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Properties node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_props_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_props_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Worksheet node
+*  lv_worksheets_num = excel-&gt;get_worksheets_size( ).
+*  DO lv_worksheets_num TIMES.
+*    lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                     parent = lo_document ).
+*
+*    MOVE sy-index TO lv_worksheets_numc.
+*    SHIFT lv_worksheets_numc LEFT DELETING LEADING &apos;0&apos;.
+*    lv_xml_node_worksheet_pn = lc_xml_node_worksheet_pn.
+*    REPLACE ALL OCCURRENCES OF &apos;#&apos; IN lv_xml_node_worksheet_pn WITH lv_worksheets_numc.
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                  value = lv_xml_node_worksheet_pn ).
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                  value = lc_xml_node_worksheet_ct ).
+*    lo_element_root-&gt;append_child( new_child = lo_element ).
+*  ENDDO.
+*
+*  lo_iterator = me-&gt;excel-&gt;get_worksheets_iterator( ).
+*  WHILE lo_iterator-&gt;if_object_collection_iterator~has_next( ) EQ abap_true.
+*    lo_worksheet ?= lo_iterator-&gt;if_object_collection_iterator~get_next( ).
+*
+*    lo_nested_iterator = lo_worksheet-&gt;get_tables_iterator( ).
+*
+*    WHILE lo_nested_iterator-&gt;if_object_collection_iterator~has_next( ) EQ abap_true.
+*      lo_table ?= lo_nested_iterator-&gt;if_object_collection_iterator~get_next( ).
+*
+*      lv_value = lo_table-&gt;get_name( ).
+*      CONCATENATE &apos;/xl/tables/&apos; lv_value &apos;.xml&apos; INTO lv_value.
+*
+*      lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*      lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lv_value ).
+*      lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_table_ct ).
+*      lo_element_root-&gt;append_child( new_child = lo_element ).
+*    ENDWHILE.
+*
+*    &quot; Drawings
+*    DATA: lo_drawings TYPE REF TO zcl_excel_drawings.
+*
+*    lo_drawings = lo_worksheet-&gt;get_drawings( ).
+*    IF lo_drawings-&gt;is_empty( ) = abap_false.
+*      lv_index_str = lv_drawing_index.
+*      CONDENSE lv_index_str NO-GAPS.
+*      CONCATENATE &apos;/&apos; me-&gt;c_xl_drawings INTO lv_value.
+*      REPLACE &apos;#&apos; WITH lv_index_str INTO lv_value.
+*
+*      lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*      lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lv_value ).
+*      lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_drawings_ct ).
+*      lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*      ADD 1 TO lv_drawing_index.
+*    ENDIF.
+*  ENDWHILE.
+*
+*  &quot; media mimes
+*  DATA: lo_drawing TYPE REF TO zcl_excel_drawing,
+*        lt_media_type TYPE TABLE OF mimetypes-extension,
+*        lv_media_type TYPE mimetypes-extension,
+*        lv_mime_type  TYPE mimetypes-type.
+*
+*  lo_iterator = me-&gt;excel-&gt;get_drawings_iterator( zcl_excel_drawing=&gt;type_image ).
+*  WHILE lo_iterator-&gt;if_object_collection_iterator~has_next( ) = abap_true.
+*    lo_drawing ?= lo_iterator-&gt;if_object_collection_iterator~get_next( ).
+*
+*    lv_media_type = lo_drawing-&gt;get_media_type( ).
+*    COLLECT lv_media_type INTO lt_media_type.
+*  ENDWHILE.
+*
+*  LOOP AT lt_media_type INTO lv_media_type.
+*    CALL FUNCTION &apos;SDOK_MIMETYPE_GET&apos;
+*      EXPORTING
+*        extension = lv_media_type
+*      IMPORTING
+*        mimetype  = lv_mime_type.
+*
+*    lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_default
+*                                                     parent = lo_document ).
+*    lv_value = lv_media_type.
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_extension
+*                                  value = lv_value ).
+*    lv_value = lv_mime_type.
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                  value = lv_value ).
+*    lo_element_root-&gt;append_child( new_child = lo_element ).
+*  ENDLOOP.
+*
+*  &quot; Charts
+*  lo_iterator = me-&gt;excel-&gt;get_drawings_iterator( zcl_excel_drawing=&gt;type_chart ).
+*  WHILE lo_iterator-&gt;if_object_collection_iterator~has_next( ) = abap_true.
+*    lo_drawing ?= lo_iterator-&gt;if_object_collection_iterator~get_next( ).
+*
+*    lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                     parent = lo_document ).
+*    lv_index_str = lo_drawing-&gt;get_index( ).
+*    CONDENSE lv_index_str.
+*    lv_value = lc_xml_node_chart_pn.
+*    REPLACE ALL OCCURRENCES OF &apos;#&apos; IN lv_value WITH lv_index_str.
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                  value = lv_value ).
+*    lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                  value = lc_xml_node_chart_ct ).
+*    lo_element_root-&gt;append_child( new_child = lo_element ).
+*  ENDWHILE.
+*
+*  &quot; Strings node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_strings_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_strings_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Strings node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_override
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_partname
+*                                value = lc_xml_node_core_pn ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_contenttype
+*                                value = lc_xml_node_core_ct ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+***********************************************************************
+** STEP 5: Create xstring stream
+*  lo_streamfactory = lo_ixml-&gt;create_stream_factory( ).
+*  lo_ostream = lo_streamfactory-&gt;create_ostream_xstring( string = ep_content ).
+*  lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
+*  lo_renderer-&gt;render( ).
+
+endmethod.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/app.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>method CREATE_DOCPROPS_APP.
+
+
+** Constant node name
+  DATA: lc_xml_node_properties        TYPE string VALUE &apos;Properties&apos;,
+        lc_xml_node_application       TYPE string VALUE &apos;Application&apos;,
+        lc_xml_node_docsecurity       TYPE string VALUE &apos;DocSecurity&apos;,
+        lc_xml_node_scalecrop         TYPE string VALUE &apos;ScaleCrop&apos;,
+        lc_xml_node_company           TYPE string VALUE &apos;Company&apos;,
+        lc_xml_node_linksuptodate     TYPE string VALUE &apos;LinksUpToDate&apos;,
+        lc_xml_node_shareddoc         TYPE string VALUE &apos;SharedDoc&apos;,
+        lc_xml_node_hyperlinkschanged TYPE string VALUE &apos;HyperlinksChanged&apos;,
+        lc_xml_node_appversion        TYPE string VALUE &apos;AppVersion&apos;,
+        &quot; Namespace prefix
+        lc_vt_ns                      TYPE string VALUE &apos;vt&apos;,
+        lc_xml_node_props_ns          TYPE string VALUE &apos;http://schemas.openxmlformats.org/officeDocument/2006/extended-properties&apos;,
+        lc_xml_node_props_vt_ns       TYPE string VALUE &apos;http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes&apos;.
+
+  DATA: lo_ixml                 TYPE REF TO if_ixml,
+        lo_document             TYPE REF TO if_ixml_document,
+        lo_element_root         TYPE REF TO if_ixml_element,
+        lo_element              TYPE REF TO if_ixml_element,
+        lo_encoding             TYPE REF TO if_ixml_encoding,
+        lo_streamfactory        TYPE REF TO if_ixml_stream_factory,
+        lo_ostream              TYPE REF TO if_ixml_ostream,
+        lo_renderer             TYPE REF TO if_ixml_renderer,
+        lo_iterator             TYPE REF TO cl_object_collection_iterator,
+        lo_worksheet            TYPE REF TO zcl_excel_worksheet.
+
+  DATA: lv_value                TYPE string.
+
+**********************************************************************
+* STEP 1: Create [Content_Types].xml into the root of the ZIP
+  lo_ixml = cl_ixml=&gt;create( ).
+
+**********************************************************************
+* STEP 2: Set document attributes
+  lo_encoding = lo_ixml-&gt;create_encoding( byte_order = if_ixml_encoding=&gt;co_platform_endian
+                                          character_set = &apos;utf-8&apos; ).
+  lo_document = lo_ixml-&gt;create_document( ).
+  lo_document-&gt;set_encoding( lo_encoding ).
+  lo_document-&gt;set_standalone( abap_true ).
+
+**********************************************************************
+* STEP 3: Create main node properties
+  lo_element_root  = lo_document-&gt;create_simple_element( name   = lc_xml_node_properties
+                                                         parent = lo_document ).
+  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns&apos;
+                                     value = lc_xml_node_props_ns ).
+  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:vt&apos;
+                                     value = lc_xml_node_props_vt_ns ).
+
+**********************************************************************
+* STEP 4: Create subnodes
+  &quot; Application
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_application
+                                                   parent = lo_document ).
+  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~application.
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; DocSecurity
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_docsecurity
+                                                            parent = lo_document ).
+  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~docsecurity.
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; ScaleCrop
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_scalecrop
+                                                   parent = lo_document ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~scalecrop ).
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; Company
+  IF ooxml_doc-&gt;zif_ooxml_book_properties~company IS NOT INITIAL.
+    lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_company
+                                                     parent = lo_document ).
+    lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~company.
+    lo_element-&gt;set_value( value = lv_value ).
+    lo_element_root-&gt;append_child( new_child = lo_element ).
+  ENDIF.
+
+  &quot; LinksUpToDate
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_linksuptodate
+                                                   parent = lo_document ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~linksuptodate ).
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; SharedDoc
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_shareddoc
+                                                   parent = lo_document ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~shareddoc ).
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; HyperlinksChanged
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_hyperlinkschanged
+                                                   parent = lo_document ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~hyperlinkschanged ).
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+  &quot; AppVersion
+  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_appversion
+                                                   parent = lo_document ).
+  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~appversion.
+  lo_element-&gt;set_value( value = lv_value ).
+  lo_element_root-&gt;append_child( new_child = lo_element ).
+
+**********************************************************************
+* STEP 5: Create xstring stream
+  lo_streamfactory = lo_ixml-&gt;create_stream_factory( ).
+  lo_ostream = lo_streamfactory-&gt;create_ostream_xstring( string = ep_content ).
+  lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
+  lo_renderer-&gt;render( ).
+
+endmethod.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/core.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>method CREATE_DOCPROPS_CORE.
+*
+*
+*** Constant node name
+*  DATA: lc_xml_node_coreproperties  TYPE string VALUE &apos;coreProperties&apos;,
+*        lc_xml_node_creator         TYPE string VALUE &apos;creator&apos;,
+*        lc_xml_node_lastmodifiedby  TYPE string VALUE &apos;lastModifiedBy&apos;,
+*        lc_xml_node_created         TYPE string VALUE &apos;created&apos;,
+*        lc_xml_node_modified        TYPE string VALUE &apos;modified&apos;,
+*        &quot; Node attributes
+*        lc_xml_attr_type            TYPE string VALUE &apos;type&apos;,
+*        lc_xml_attr_target          TYPE string VALUE &apos;dcterms:W3CDTF&apos;,
+*        &quot; Node namespace
+*        lc_cp_ns                    TYPE string VALUE &apos;cp&apos;,
+*        lc_dc_ns                    TYPE string VALUE &apos;dc&apos;,
+*        lc_dcterms_ns               TYPE string VALUE &apos;dcterms&apos;,
+**        lc_dcmitype_ns              TYPE string VALUE &apos;dcmitype&apos;,
+*        lc_xsi_ns                   TYPE string VALUE &apos;xsi&apos;,
+*        lc_xml_node_cp_ns           TYPE string VALUE &apos;http://schemas.openxmlformats.org/package/2006/metadata/core-properties&apos;,
+*        lc_xml_node_dc_ns           TYPE string VALUE &apos;http://purl.org/dc/elements/1.1/&apos;,
+*        lc_xml_node_dcterms_ns      TYPE string VALUE &apos;http://purl.org/dc/terms/&apos;,
+*        lc_xml_node_dcmitype_ns     TYPE string VALUE &apos;http://purl.org/dc/dcmitype/&apos;,
+*        lc_xml_node_xsi_ns          TYPE string VALUE &apos;http://www.w3.org/2001/XMLSchema-instance&apos;.
+*
+*  DATA: lo_ixml           TYPE REF TO if_ixml,
+*        lo_document       TYPE REF TO if_ixml_document,
+*        lo_element_root   TYPE REF TO if_ixml_element,
+*        lo_element        TYPE REF TO if_ixml_element,
+*        lo_encoding       TYPE REF TO if_ixml_encoding,
+*        lo_streamfactory  TYPE REF TO if_ixml_stream_factory,
+*        lo_ostream        TYPE REF TO if_ixml_ostream,
+*        lo_renderer       TYPE REF TO if_ixml_renderer.
+*
+*  DATA: lv_value          TYPE string,
+*        lv_date           TYPE sydatum,
+*        lv_time           TYPE syuzeit.
+*
+***********************************************************************
+** STEP 1: Create [Content_Types].xml into the root of the ZIP
+*  lo_ixml = cl_ixml=&gt;create( ).
+*
+***********************************************************************
+** STEP 2: Set document attributes
+*  lo_encoding = lo_ixml-&gt;create_encoding( byte_order = if_ixml_encoding=&gt;co_platform_endian
+*                                          character_set = &apos;utf-8&apos; ).
+*  lo_document = lo_ixml-&gt;create_document( ).
+*  lo_document-&gt;set_encoding( lo_encoding ).
+*  lo_document-&gt;set_standalone( abap_true ).
+*
+***********************************************************************
+** STEP 3: Create main node coreProperties
+*  lo_element_root  = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_coreproperties
+*                                                            prefix = lc_cp_ns
+*                                                            parent = lo_document ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:cp&apos;
+*                                     value = lc_xml_node_cp_ns ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:dc&apos;
+*                                     value = lc_xml_node_dc_ns ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:dcterms&apos;
+*                                     value = lc_xml_node_dcterms_ns ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:dcmitype&apos;
+*                                     value = lc_xml_node_dcmitype_ns ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns:xsi&apos;
+*                                     value = lc_xml_node_xsi_ns ).
+*
+***********************************************************************
+** STEP 4: Create subnodes
+*  &quot; Creator node
+*  lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_creator
+*                                                      prefix = lc_dc_ns
+*                                                      parent = lo_document ).
+*  lv_value = excel-&gt;zif_excel_book_properties~creator.
+*  lo_element-&gt;set_value( value = lv_value ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; lastModifiedBy node
+*  lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_lastmodifiedby
+*                                                      prefix = lc_cp_ns
+*                                                      parent = lo_document ).
+*  lv_value = excel-&gt;zif_excel_book_properties~lastmodifiedby.
+*  lo_element-&gt;set_value( value = lv_value ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Created node
+*  lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_created
+*                                                      prefix = lc_dcterms_ns
+*                                                      parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name    = lc_xml_attr_type
+*                                prefix  = lc_xsi_ns
+*                                value   = lc_xml_attr_target ).
+*
+*  CONVERT TIME STAMP excel-&gt;zif_excel_book_properties~created TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
+*  CONCATENATE lv_date lv_time INTO lv_value RESPECTING BLANKS.
+*  REPLACE ALL OCCURRENCES OF REGEX &apos;([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})&apos; IN lv_value WITH &apos;$1-$2-$3T$4:$5:$6Z&apos;.
+** lv_value = excel-&gt;zif_excel_book_properties~created.
+**  lv_value = &apos;2010-07-04T14:58:53Z&apos;.
+*  lo_element-&gt;set_value( value = lv_value ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Modified node
+*  lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_modified
+*                                                      prefix = lc_dcterms_ns
+*                                                      parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name    = lc_xml_attr_type
+*                                prefix  = lc_xsi_ns
+*                                value   = lc_xml_attr_target ).
+*  CONVERT TIME STAMP excel-&gt;zif_excel_book_properties~modified TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
+*  CONCATENATE lv_date lv_time INTO lv_value RESPECTING BLANKS.
+*  REPLACE ALL OCCURRENCES OF REGEX &apos;([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})&apos; IN lv_value WITH &apos;$1-$2-$3T$4:$5:$6Z&apos;.
+**  lv_value = excel-&gt;zif_excel_book_properties~modified.
+**  lv_value = &apos;2010-07-04T14:58:53Z&apos;.
+*  lo_element-&gt;set_value( value = lv_value ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+***********************************************************************
+** STEP 5: Create xstring stream
+*  lo_streamfactory = lo_ixml-&gt;create_stream_factory( ).
+*  lo_ostream = lo_streamfactory-&gt;create_ostream_xstring( string = ep_content ).
+*  lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
+*  lo_renderer-&gt;render( ).
+
+endmethod.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Create &apos;_rels/.rels&apos;" EXPOSURE="1" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>method CREATE_RELATIONSHIPS.
+*
+*
+*** Constant node name
+*  DATA: lc_xml_node_relationships TYPE string VALUE &apos;Relationships&apos;,
+*        lc_xml_node_relationship  TYPE string VALUE &apos;Relationship&apos;,
+*        &quot; Node attributes
+*        lc_xml_attr_id            TYPE string VALUE &apos;Id&apos;,
+*        lc_xml_attr_type          TYPE string VALUE &apos;Type&apos;,
+*        lc_xml_attr_target        TYPE string VALUE &apos;Target&apos;,
+*        &quot; Node namespace
+*        lc_xml_node_rels_ns       TYPE string VALUE &apos;http://schemas.openxmlformats.org/package/2006/relationships&apos;,
+*        &quot; Node id
+*        lc_xml_node_rId1_id       TYPE string VALUE &apos;rId1&apos;,
+*        lc_xml_node_rId2_id       TYPE string VALUE &apos;rId2&apos;,
+*        lc_xml_node_rId3_id       TYPE string VALUE &apos;rId3&apos;,
+*        &quot; Node type
+*        lc_xml_node_rId1_tp       TYPE string VALUE &apos;http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument&apos;,
+*        lc_xml_node_rId2_tp       TYPE string VALUE &apos;http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties&apos;,
+*        lc_xml_node_rId3_tp       TYPE string VALUE &apos;http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties&apos;,
+*        &quot; Node target
+*        lc_xml_node_rId1_tg       TYPE string VALUE &apos;xl/workbook.xml&apos;,
+*        lc_xml_node_rId2_tg       TYPE string VALUE &apos;docProps/core.xml&apos;,
+*        lc_xml_node_rId3_tg       TYPE string VALUE &apos;docProps/app.xml&apos;.
+*
+*  DATA: lo_ixml           TYPE REF TO if_ixml,
+*        lo_document       TYPE REF TO if_ixml_document,
+*        lo_element_root   TYPE REF TO if_ixml_element,
+*        lo_element        TYPE REF TO if_ixml_element,
+*        lo_encoding       TYPE REF TO if_ixml_encoding,
+*        lo_streamfactory  TYPE REF TO if_ixml_stream_factory,
+*        lo_ostream        TYPE REF TO if_ixml_ostream,
+*        lo_renderer       TYPE REF TO if_ixml_renderer.
+*
+***********************************************************************
+** STEP 1: Create [Content_Types].xml into the root of the ZIP
+*  lo_ixml = cl_ixml=&gt;create( ).
+*
+***********************************************************************
+** STEP 2: Set document attributes
+*  lo_encoding = lo_ixml-&gt;create_encoding( byte_order = if_ixml_encoding=&gt;co_platform_endian
+*                                          character_set = &apos;utf-8&apos; ).
+*  lo_document = lo_ixml-&gt;create_document( ).
+*  lo_document-&gt;set_encoding( lo_encoding ).
+*  lo_document-&gt;set_standalone( abap_true ).
+*
+***********************************************************************
+** STEP 3: Create main node relationships
+*  lo_element_root  = lo_document-&gt;create_simple_element( name   = lc_xml_node_relationships
+*                                                         parent = lo_document ).
+*  lo_element_root-&gt;set_attribute_ns( name  = &apos;xmlns&apos;
+*                                     value = lc_xml_node_rels_ns ).
+*
+***********************************************************************
+** STEP 4: Create subnodes
+*  &quot; Theme node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_relationship
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_id
+*                                value = lc_xml_node_rId3_id ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_type
+*                                value = lc_xml_node_rId3_tp ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_target
+*                                value = lc_xml_node_rId3_tg ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; Styles node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_relationship
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_id
+*                                value = lc_xml_node_rId2_id ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_type
+*                                value = lc_xml_node_rId2_tp ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_target
+*                                value = lc_xml_node_rId2_tg ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+*  &quot; rels node
+*  lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_relationship
+*                                                   parent = lo_document ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_id
+*                                value = lc_xml_node_rId1_id ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_type
+*                                value = lc_xml_node_rId1_tp ).
+*  lo_element-&gt;set_attribute_ns( name  = lc_xml_attr_target
+*                                value = lc_xml_node_rId1_tg ).
+*  lo_element_root-&gt;append_child( new_child = lo_element ).
+*
+***********************************************************************
+** STEP 5: Create xstring stream
+*  lo_streamfactory = lo_ixml-&gt;create_stream_factory( ).
+*  lo_ostream = lo_streamfactory-&gt;create_ostream_xstring( string = ep_content ).
+*  lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
+*  lo_renderer-&gt;render( ).
+
+endmethod.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" VERSION="1" LANGU="E" DESCRIPT="Convert a FLAG to BOOLEAN value" EXPOSURE="1" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="IP_FLAG" VERSION="1" LANGU="E" DESCRIPT="General Flag" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="FLAG"/>
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="EP_BOOLEAN" VERSION="1" LANGU="E" DESCRIPT="Boolean value" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="CHAR5"/>
+  <source>method FLAG2BOOL.
+
+
+  IF ip_flag EQ abap_true.
+    ep_boolean = &apos;true&apos;.
+  ELSE.
+    ep_boolean = &apos;false&apos;.
+  ENDIF.
+endmethod.</source>
+ </method>
+ <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="IO_OOXML_DOCUMENT" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_OOXML_DOCUMENT"/>
+  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="EP_FILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD write_file.
+
+  me-&gt;ooxml_doc = io_ooxml_document.
+  ep_file = me-&gt;create( ).
+
+ENDMETHOD.</source>
+ </method>
+</CLAS>
