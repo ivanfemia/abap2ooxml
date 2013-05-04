@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_OOXML_WRITER" VERSION="1" LANGU="E" DESCRIPT="Office Open XML Document Writer" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSABSTRCT="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+<CLAS CLSNAME="/CEX/CL_OOXML_WRITER" VERSION="1" LANGU="E" DESCRIPT="Office Open XML Document Writer" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSABSTRCT="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* use this source file for the definition and implementation of
 *&quot;* local helper classes, interface definitions and type
 *&quot;* declarations</localImplementation>
@@ -8,16 +8,16 @@
 *&quot;* components in the private section</localTypes>
  <localMacros>*&quot;* use this source file for any macro definitions you need
 *&quot;* in the implementation part of the class</localMacros>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Content Type XML File Name" EXPOSURE="1" STATE="1" EDITORDER="1 " ATTDECLTYP="2" ATTVALUE="&apos;[Content_Types].xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="App XML File Name" EXPOSURE="1" STATE="1" EDITORDER="2 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/app.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Core XML File Name" EXPOSURE="1" STATE="1" EDITORDER="3 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/core.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="C_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Rels XML File Name" EXPOSURE="1" STATE="1" EDITORDER="4 " ATTDECLTYP="2" ATTVALUE="&apos;_rels/.rels&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="OFF" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="5 " ATTDECLTYP="2" ATTVALUE="&apos;0&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="ON" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="6 " ATTDECLTYP="2" ATTVALUE="&apos;1&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <attribute CLSNAME="ZCL_OOXML_WRITER" CMPNAME="OOXML_DOC" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" EXPOSURE="1" STATE="1" EDITORDER="0 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OOXML_DOCUMENT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE" VERSION="1" LANGU="E" DESCRIPT="Create OOXML document" EXPOSURE="1" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE" SCONAME="EP_OOXML_DOCUMENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
-  <source>METHOD create.
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="C_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Content Type XML File Name" EXPOSURE="1" STATE="1" EDITORDER="2 " ATTDECLTYP="2" ATTVALUE="&apos;[Content_Types].xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="C_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="App XML File Name" EXPOSURE="1" STATE="1" EDITORDER="3 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/app.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="C_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Core XML File Name" EXPOSURE="1" STATE="1" EDITORDER="4 " ATTDECLTYP="2" ATTVALUE="&apos;docProps/core.xml&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="C_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Rels XML File Name" EXPOSURE="1" STATE="1" EDITORDER="5 " ATTDECLTYP="2" ATTVALUE="&apos;_rels/.rels&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="OFF" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="6 " ATTDECLTYP="2" ATTVALUE="&apos;0&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="ON" VERSION="1" LANGU="E" DESCRIPT="Byte Value" EXPOSURE="1" STATE="1" EDITORDER="7 " ATTDECLTYP="2" ATTVALUE="&apos;1&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="OOXML_DOC" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" EXPOSURE="1" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="/CEX/CL_OOXML_DOCUMENT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE" VERSION="1" LANGU="E" DESCRIPT="Create OOXML document" EXPOSURE="1" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE" SCONAME="EP_OOXML_DOCUMENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD CREATE.
 
 * Office 2007 file format is a cab of several xml files with extension .xlsx
 
@@ -58,8 +58,8 @@
 
 ENDMETHOD.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Create &apos;[Content_Types].xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" VERSION="1" LANGU="E" DESCRIPT="Create &apos;[Content_Types].xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_CONTENT_TYPES" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
   <source>method CREATE_CONTENT_TYPES.
 
 ** Constant node name
@@ -135,9 +135,9 @@ ENDMETHOD.</source>
 
 endmethod.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/app.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
-  <source>method CREATE_DOCPROPS_APP.
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/app.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_APP" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD create_docprops_app.
 
 
 ** Constant node name
@@ -162,9 +162,7 @@ endmethod.</source>
         lo_encoding             TYPE REF TO if_ixml_encoding,
         lo_streamfactory        TYPE REF TO if_ixml_stream_factory,
         lo_ostream              TYPE REF TO if_ixml_ostream,
-        lo_renderer             TYPE REF TO if_ixml_renderer,
-        lo_iterator             TYPE REF TO cl_object_collection_iterator,
-        lo_worksheet            TYPE REF TO zcl_excel_worksheet.
+        lo_renderer             TYPE REF TO if_ixml_renderer.
 
   DATA: lv_value                TYPE string.
 
@@ -194,14 +192,14 @@ endmethod.</source>
   &quot; Application
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_application
                                                    parent = lo_document ).
-  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~application.
+  lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~application.
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
   &quot; DocSecurity
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_docsecurity
                                                             parent = lo_document ).
-  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~docsecurity.
+  lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~docsecurity.
   CONDENSE lv_value.
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
@@ -209,15 +207,15 @@ endmethod.</source>
   &quot; ScaleCrop
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_scalecrop
                                                    parent = lo_document ).
-  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~scalecrop ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;/cex/if_ooxml_book_properties~scalecrop ).
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
   &quot; Company
-  IF ooxml_doc-&gt;zif_ooxml_book_properties~company IS NOT INITIAL.
+  IF ooxml_doc-&gt;/cex/if_ooxml_book_properties~company IS NOT INITIAL.
     lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_company
                                                      parent = lo_document ).
-    lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~company.
+    lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~company.
     lo_element-&gt;set_value( value = lv_value ).
     lo_element_root-&gt;append_child( new_child = lo_element ).
   ENDIF.
@@ -225,28 +223,28 @@ endmethod.</source>
   &quot; LinksUpToDate
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_linksuptodate
                                                    parent = lo_document ).
-  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~linksuptodate ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;/cex/if_ooxml_book_properties~linksuptodate ).
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
   &quot; SharedDoc
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_shareddoc
                                                    parent = lo_document ).
-  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~shareddoc ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;/cex/if_ooxml_book_properties~shareddoc ).
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
   &quot; HyperlinksChanged
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_hyperlinkschanged
                                                    parent = lo_document ).
-  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;zif_ooxml_book_properties~hyperlinkschanged ).
+  lv_value = me-&gt;flag2bool( ooxml_doc-&gt;/cex/if_ooxml_book_properties~hyperlinkschanged ).
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
   &quot; AppVersion
   lo_element = lo_document-&gt;create_simple_element( name   = lc_xml_node_appversion
                                                    parent = lo_document ).
-  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~appversion.
+  lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~appversion.
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
@@ -257,11 +255,11 @@ endmethod.</source>
   lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
   lo_renderer-&gt;render( ).
 
-endmethod.</source>
+ENDMETHOD.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/core.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
-  <source>method CREATE_DOCPROPS_CORE.
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" VERSION="1" LANGU="E" DESCRIPT="Create &apos;docProps/core.xml&apos;" EXPOSURE="1" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_DOCPROPS_CORE" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD create_docprops_core.
 
 ** Constant node name
   DATA: lc_xml_node_coreproperties  TYPE string VALUE &apos;coreProperties&apos;,
@@ -330,7 +328,7 @@ endmethod.</source>
   lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_creator
                                                       prefix = lc_dc_ns
                                                       parent = lo_document ).
-  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~creator.
+  lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~creator.
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
@@ -338,7 +336,7 @@ endmethod.</source>
   lo_element = lo_document-&gt;create_simple_element_ns( name   = lc_xml_node_lastmodifiedby
                                                       prefix = lc_cp_ns
                                                       parent = lo_document ).
-  lv_value = ooxml_doc-&gt;zif_ooxml_book_properties~lastmodifiedby.
+  lv_value = ooxml_doc-&gt;/cex/if_ooxml_book_properties~lastmodifiedby.
   lo_element-&gt;set_value( value = lv_value ).
   lo_element_root-&gt;append_child( new_child = lo_element ).
 
@@ -350,7 +348,7 @@ endmethod.</source>
                                 prefix  = lc_xsi_ns
                                 value   = lc_xml_attr_target ).
 
-  CONVERT TIME STAMP ooxml_doc-&gt;zif_ooxml_book_properties~created TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
+  CONVERT TIME STAMP ooxml_doc-&gt;/cex/if_ooxml_book_properties~created TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
   CONCATENATE lv_date lv_time INTO lv_value RESPECTING BLANKS.
   REPLACE ALL OCCURRENCES OF REGEX &apos;([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})&apos; IN lv_value WITH &apos;$1-$2-$3T$4:$5:$6Z&apos;.
   lo_element-&gt;set_value( value = lv_value ).
@@ -363,7 +361,7 @@ endmethod.</source>
   lo_element-&gt;set_attribute_ns( name    = lc_xml_attr_type
                                 prefix  = lc_xsi_ns
                                 value   = lc_xml_attr_target ).
-  CONVERT TIME STAMP ooxml_doc-&gt;zif_ooxml_book_properties~modified TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
+  CONVERT TIME STAMP ooxml_doc-&gt;/cex/if_ooxml_book_properties~modified TIME ZONE sy-zonlo INTO DATE lv_date TIME lv_time.
   CONCATENATE lv_date lv_time INTO lv_value RESPECTING BLANKS.
   REPLACE ALL OCCURRENCES OF REGEX &apos;([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})&apos; IN lv_value WITH &apos;$1-$2-$3T$4:$5:$6Z&apos;.
   lo_element-&gt;set_value( value = lv_value ).
@@ -376,10 +374,10 @@ endmethod.</source>
   lo_renderer = lo_ixml-&gt;create_renderer( ostream  = lo_ostream document = lo_document ).
   lo_renderer-&gt;render( ).
 
-endmethod.</source>
+ENDMETHOD.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Create &apos;_rels/.rels&apos;" EXPOSURE="1" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" VERSION="1" LANGU="E" DESCRIPT="Create &apos;_rels/.rels&apos;" EXPOSURE="1" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="CREATE_RELATIONSHIPS" SCONAME="EP_CONTENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
   <source>method CREATE_RELATIONSHIPS.
 
 
@@ -477,9 +475,9 @@ endmethod.</source>
 
 endmethod.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" VERSION="1" LANGU="E" DESCRIPT="Convert a FLAG to BOOLEAN value" EXPOSURE="1" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="IP_FLAG" VERSION="1" LANGU="E" DESCRIPT="General Flag" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="FLAG"/>
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="EP_BOOLEAN" VERSION="1" LANGU="E" DESCRIPT="Boolean value" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="CHAR5"/>
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="FLAG2BOOL" VERSION="1" LANGU="E" DESCRIPT="Convert a FLAG to BOOLEAN value" EXPOSURE="1" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="IP_FLAG" VERSION="1" LANGU="E" DESCRIPT="General Flag" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="FLAG"/>
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="FLAG2BOOL" SCONAME="EP_BOOLEAN" VERSION="1" LANGU="E" DESCRIPT="Boolean value" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="CHAR5"/>
   <source>method FLAG2BOOL.
 
 
@@ -490,10 +488,10 @@ endmethod.</source>
   ENDIF.
 endmethod.</source>
  </method>
- <method CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="IO_OOXML_DOCUMENT" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_OOXML_DOCUMENT"/>
-  <parameter CLSNAME="ZCL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="EP_FILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
-  <source>METHOD write_file.
+ <method CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="WRITE_FILE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="IO_OOXML_DOCUMENT" VERSION="1" LANGU="E" DESCRIPT="Open Office XML Document" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="/CEX/CL_OOXML_DOCUMENT"/>
+  <parameter CLSNAME="/CEX/CL_OOXML_WRITER" CMPNAME="WRITE_FILE" SCONAME="EP_FILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="XSTRING"/>
+  <source>METHOD WRITE_FILE.
 
   me-&gt;ooxml_doc = io_ooxml_document.
   ep_file = me-&gt;create( ).
